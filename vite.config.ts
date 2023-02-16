@@ -3,19 +3,29 @@
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
+import { viteMockServe } from "vite-plugin-mock";
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const configure = loadEnv(mode, process.cwd());
   const BASE_URL = configure.VITE_BASE_URL;
-  console.log(configure.VITE_OPEN);
 
   return defineConfig({
-    plugins: [vue()],
+    // 插件
+    plugins: [
+      vue(),
+      // mock
+      viteMockServe({
+        supportTs: false,
+        logger: false,
+        mockPath: "./src/mock",
+      }),
+    ],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
       },
     },
+    // 配置代理
     server: {
       open: false,
       port: 8082,

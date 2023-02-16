@@ -10,7 +10,7 @@ import { createRouterGuard } from "@/guard";
 async function setupApp() {
   const app = createApp(App);
   // 使用pinia和ElementPlus
-  app.use(createPinia);
+  app.use(createPinia());
   app.use(ElementPlus);
   // 加载路由
   createRouterGuard(app);
