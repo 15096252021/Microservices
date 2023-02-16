@@ -1,0 +1,21 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "id": "1",
+      "name": "404",
+      "path": "/src/views/404.vue"
+    },
+    {
+      "id": "1",
+      "name": "403",
+      "path": "/src/views/403.vue"
+    },
+    {
+      "id": "1",
+      "name": "405",
+      "path": "/src/views/405.vue"
+    }
+  ]
+}
