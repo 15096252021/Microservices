@@ -1,0 +1,11 @@
+{
+  "code": 10000,
+  "status": true,
+  "msg": "成功",
+  "data": {
+    "id": 1,
+    "username": "zhangdapeng",
+    "role": 1,
+    "token": "this is a fake token"
+  }
+}
