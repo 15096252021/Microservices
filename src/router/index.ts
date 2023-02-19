@@ -1,11 +1,3 @@
-/*
- * @FilePath: \src\src\router\index.ts
- * @Author: zhangxin
- * @Date: 2023-02-19 12:10:21
- * @LastEditors: zhangxin
- * @LastEditTime: 2023-02-19 13:52:39
- * @Description: 
- */
 /** @format */
 
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
@@ -21,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "/:pathMatch(.*)*",
         name: "NotFound",
         meta: {
-          title: 404
+          title: 404,
         },
         component: () =>
           import(/* webpackChunkName: "about" */ "@/views/404.vue"),
@@ -31,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Viedo",
         meta: {
           name: "系统首页",
-          title: "系统首页1"
+          title: "系统首页1",
         },
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -49,7 +41,7 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "@/views/Login/Login.vue"),
-  }
+  },
 ];
 
 const router = createRouter({
