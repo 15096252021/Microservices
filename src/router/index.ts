@@ -1,3 +1,11 @@
+/*
+ * @FilePath: \src\src\router\index.ts
+ * @Author: zhangxin
+ * @Date: 2023-02-19 12:10:21
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-02-19 13:52:39
+ * @Description: 
+ */
 /** @format */
 
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
@@ -7,6 +15,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "home",
     component: () => import("@/views/Home/Home.vue"),
+    redirect: "/Viedo",
     children: [
       {
         path: "/:pathMatch(.*)*",

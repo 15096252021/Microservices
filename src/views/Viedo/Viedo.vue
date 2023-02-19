@@ -18,11 +18,8 @@ export default defineComponent({
     let menus = reactive({ mensList });
     const app = useStore();
     const {name} = storeToRefs(app);
-    const handleClose = (key: string, keyPath: string[]) => { };
-    const collpaseMenu = () => { };
     onMounted(() => {
       axios.get("/user/menu").then((res) => {
-        console.log(res.data);
         menus.mensList = res.data.menusList;
       });
     });

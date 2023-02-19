@@ -23,8 +23,14 @@ export const useTagsStore = defineStore("tags", {
     show: (state) => {
       // 当list等于0时，让路由跳转到首页
       const router = useRouter();
-      if(state.list.length === 0){
-          router.push("Viedo")
+
+      if (state.list.length === 0) {
+        state.list.push({
+          name: 'Viedo',
+          title: '首页',
+          path: '/Viedo',
+        });
+        router.push({ name: "Viedo" })
       }
       return state.list.length > 0;
     },
