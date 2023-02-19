@@ -68,7 +68,7 @@ const router = useRouter();
 const handleCommand = (command: string) => {
 	if (command == 'logout') {
 		localStorage.removeItem('zdp_admin_template_username');
-		router.push('/login');
+		router.push('/Login');
 	} else if (command == 'user') {
 		router.push('/user');
 	}
@@ -96,7 +96,7 @@ const handleCommand = (command: string) => {
 .header .logo {
 	float: left;
 	width: 250px;
-	line-height: 70px;
+	line-height: 60px;
 }
 .header-right {
 	float: right;
@@ -104,7 +104,7 @@ const handleCommand = (command: string) => {
 }
 .header-user-con {
 	display: flex;
-	height: 70px;
+	height: 60px;
 	align-items: center;
 }
 .btn-fullscreen {

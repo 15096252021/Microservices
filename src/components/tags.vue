@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { useTagsStore } from '@/store/tags';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
-
+import { onBeforeMount } from 'vue';
 const route = useRoute();
 const router = useRouter();
 
@@ -53,7 +53,7 @@ const closeTags = (index: number) => {
   if (item) {
     delItem.path === route.fullPath && router.push(item.path);
   } else {
-    router.push('Viedo');
+    // router.push('Viedo');
   }
 };
 
@@ -78,10 +78,18 @@ const setTags = (route: any) => {
     });
   }
 };
-
-// 设置标签为当前路由
-setTags(route);
-
+// 组件挂载之前添加一个默认路由
+onBeforeMount(() => {
+  console.log("123；",route);
+  // 挂载组件时，写入默认的标签
+  if(tags.list.length == 0){
+    tags.setTagsItem({
+      name: "Viedo",
+      title: "首页",
+      path: "/Viedo"
+    });
+  }
+}),
 // 路由更新之前，设置标签为要跳转的路由
 onBeforeRouteUpdate(to => {
   setTags(to);

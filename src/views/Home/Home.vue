@@ -30,13 +30,14 @@
 <script lang="ts">
 
 
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref,onMounted } from 'vue'
 import Header from "@/components/Header.vue"
 import sidebar from "@/components/sidebar.vue"
 import tags from '@/components/tags.vue'
 import { storeToRefs } from 'pinia'
 import { useStore } from '@/store';
 import { showLoading } from '@/utils/Loading';
+import { useRouter } from 'vue-router'
 export default defineComponent({
   setup() {
     const store = useStore();
@@ -154,8 +155,30 @@ export default defineComponent({
         index: '/permissionion',
         title: '权限管理',
         permission: '13',
+      },
+      {
+        icon: 'Setting',
+        index: '/icon',
+        title: '自定义图标',
+        permission: '10',
+      },
+      {
+        icon: 'PieChart',
+        index: '/charts',
+        title: 'schart图表',
+        permission: '11',
+      },
+      {
+        icon: 'Warning',
+        index: '/permissionion',
+        title: '权限管理',
+        permission: '13',
       }
     ];
+    onMounted(() => {
+      const router = useRouter();
+      router.push("/Viedo")
+    })
     return {
       name, chageName, loading, items
     }

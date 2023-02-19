@@ -1,3 +1,5 @@
+import { useRouter } from 'vue-router';
+
 /** @format */
 
 import { defineStore } from "pinia";
@@ -19,6 +21,11 @@ export const useTagsStore = defineStore("tags", {
   getters: {
     // 是否显示
     show: (state) => {
+      // 当list等于0时，让路由跳转到首页
+      const router = useRouter();
+      if(state.list.length === 0){
+          router.push("Viedo")
+      }
       return state.list.length > 0;
     },
     // 标签名列表
@@ -53,7 +60,7 @@ export const useTagsStore = defineStore("tags", {
           } else if (i > 0) {
             data.$router.push(this.list[i - 1].path);
           } else {
-            data.$router.push("404");
+            // data.$router.push("/Viedo");
           }
           this.list.splice(i, 1);
           break;
