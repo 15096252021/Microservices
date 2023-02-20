@@ -2,16 +2,15 @@
 
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <el-container v-loading="loading" class="home">
+  <el-container v-loading="loading" class="home" element-loading-text="加载中">
     <el-header height="60px">
       <Header></Header>
     </el-header>
     <el-container class="home-body">
-      <el-aside class="home-body-aside" :style="shrinkORNot">
-        <!-- <transition name="el-zoom-in-left" class="home-body-aside"> -->
-          <menuTree :MenuList="items" />
-        <!-- </transition> -->
-      </el-aside>
+      <menuTree
+        :MenuList="items"
+        class="home-body-aside"
+        :style="shrinkORNot" />
       <el-main class="home-body-content" :style="contentWidth">
         <el-header class="home-body-content-crumbs">
           <tags />
@@ -25,22 +24,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import Header from "@/components/Header.vue";
 import sidebar from "@/components/sidebar.vue";
 import tags from "@/components/tags.vue";
 import { storeToRefs } from "pinia";
 import { useStore } from "@/store";
 import { showLoading } from "@/utils/Loading";
-import { useRouter } from "vue-router";
 import { useSidebarStore } from "@/store/sidebar";
 export default defineComponent({
   setup() {
     const store = useStore();
     const { name } = storeToRefs(store);
-    const chageName = () => {
-      name.value = "大厦大家撒谎的骄傲和时间";
-    };
     const loading = ref(true);
     showLoading(loading);
     const items = [
@@ -182,13 +177,8 @@ export default defineComponent({
         ? { width: "calc(100% - 250px)" }
         : { width: "calc(100% - 60px)" }
     );
-    onMounted(() => {
-      const router = useRouter();
-      router.push("/Viedo");
-    });
     return {
       name,
-      chageName,
       loading,
       items,
       shrinkORNot,
@@ -259,5 +249,4 @@ export default defineComponent({
 .el-menu {
   transition: all 10ms;
 }
-
 </style>

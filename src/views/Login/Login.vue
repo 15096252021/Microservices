@@ -27,7 +27,7 @@
                 class="loginBox-input-el" />
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="LoginSingin(ruleFormRef)" class="loginBox-input-btn">登录</el-button>
+              <el-button type="primary" @click="LoginSigning(ruleFormRef)" class="loginBox-input-btn">登录</el-button>
               <el-button @click="resetForm(ruleFormRef)" class="loginBox-input-btn">重置</el-button>
             </el-form-item>
           </el-form>
@@ -39,21 +39,14 @@
 </template>
 
 <script lang="ts">
-
-
-
-
-
-
-import { defineComponent, toRefs, reactive, ref, onMounted, onBeforeMount } from 'vue'
+import { defineComponent, toRefs, reactive, ref} from 'vue'
 import "@/assets/css/Login/Login.css"
 import { LoginDataClass } from '@/type/Login/Login'
 import { FormInstance } from 'element-plus'
 import { signin } from "@/api/Login/Login"
-import ruoter from "@/router";
+import router from "@/router";
 import { showLoading } from "@/utils/Loading"
-import { ElMessage, ElMessageBox } from 'element-plus'
-import type { Action } from 'element-plus'
+import { ElMessageBox } from 'element-plus'
 
 export default defineComponent({
   setup() {
@@ -96,7 +89,7 @@ export default defineComponent({
     })
 
 
-    const LoginSingin = (formEl: FormInstance | undefined) => {
+    const LoginSigning = (formEl: FormInstance | undefined) => {
       console.log(formEl);
 
       if (!formEl) { return false } else {
@@ -107,7 +100,7 @@ export default defineComponent({
               // 保存token
               sessionStorage.setItem('token', token);
               // 刷新页面
-              ruoter.push('/')
+              router.push('/')
             }).catch((res) => {
               if (res) {
                 if (res.msg) {
@@ -139,7 +132,7 @@ export default defineComponent({
       ruleFormRef,
       rules,
       resetForm,
-      LoginSingin,
+      LoginSigning,
       loading, changeLoading
     }
   }
