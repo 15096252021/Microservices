@@ -25,7 +25,7 @@
           <span v-if="message" class="btn-bell-badge"></span>
         </div>
         <!-- 用户头像 -->
-        <el-avatar :size="30" :src="imgUrl" class="user-avator" />
+        <el-avatar :size="30" :src="imgUrl" class="user-avatar" />
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
@@ -148,7 +148,7 @@ const handleCommand = (command: string) => {
 .user-name {
   margin-left: 10px;
 }
-.user-avator {
+.user-avatar {
   margin-left: 20px;
 }
 .el-dropdown-link {

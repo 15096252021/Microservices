@@ -7,10 +7,9 @@
       <Header></Header>
     </el-header>
     <el-container class="home-body">
-      <menuTree
-        :MenuList="items"
-        class="home-body-aside"
-        :style="shrinkORNot" />
+      <el-aside class="home-body-aside" :style="shrinkORNot">
+        <menuTree :MenuList="items" />
+      </el-aside>
       <el-main class="home-body-content" :style="contentWidth">
         <el-header class="home-body-content-crumbs">
           <tags />
@@ -155,7 +154,7 @@ export default defineComponent({
       {
         icon: "PieChart",
         index: "/charts",
-        title: "schart图表",
+        title: "chart图表",
         permission: "11",
       },
       {
@@ -202,12 +201,10 @@ export default defineComponent({
     height: calc(100% - 60px);
     display: flex;
     flex-direction: row;
-
     &-aside {
       height: 100%;
       overflow-x: hidden;
     }
-
     &-content {
       height: 100%;
 
@@ -226,8 +223,9 @@ export default defineComponent({
 }
 
 :root {
-  --el-header-padding: 0 0;
+  --el-header-padding: 0;
   --div-margin-left: 10px;
+  --el-main-padding: 0;
 }
 
 .el-header {
@@ -239,11 +237,11 @@ export default defineComponent({
 }
 /* 加过渡给侧边导航*/
 .el-aside {
-  transition: width 0.25s;
-  -webkit-transition: width 0.25s;
-  -moz-transition: width 0.25s;
-  -webkit-transition: width 0.25s;
-  -o-transition: width 0.25s;
+  transition: width 0.5s;
+  -webkit-transition: width 0.5s;
+  -moz-transition: width 0.5s;
+  -webkit-transition: width 0.5s;
+  -o-transition: width 0.5s;
 }
 /*加快侧边栏文字消失的速度*/
 .el-menu {
