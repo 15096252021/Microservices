@@ -29,7 +29,7 @@ request.interceptors.response.use((res) => {
     }
     return Promise.reject(res.data);
   }
-  return res
+  return res.data
 },(err) =>{
   console.log(err);
 })

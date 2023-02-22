@@ -1,9 +1,9 @@
 /** @format */
 
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import path from "path";
-import { viteMockServe } from "vite-plugin-mock";
+import { defineConfig, loadEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import path from 'path';
+import { viteMockServe } from 'vite-plugin-mock';
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const configure = loadEnv(mode, process.cwd());
@@ -17,12 +17,13 @@ export default ({ mode }) => {
       viteMockServe({
         supportTs: false,
         logger: false,
-        mockPath: "./src/mock",
+        mockPath: './src/mock',
       }),
     ],
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "src"),
+        '@': path.resolve(__dirname, 'src'),
+        '~': path.resolve(__dirname, '/src'),
       },
     },
     // 配置代理
@@ -31,22 +32,22 @@ export default ({ mode }) => {
       port: 8082,
       proxy: {
         [configure.VITE_BASE_URL]: {
-          target: configure.VITE_APP_BASE_URL || "",
+          target: configure.VITE_APP_BASE_URL || '',
           changeOrigin: true,
-          rewrite: (path) => path.replace(new RegExp(`${BASE_URL}`), ""),
+          rewrite: (path) => path.replace(new RegExp(`${BASE_URL}`), ''),
         },
       },
     },
     define: {
-      "process.env": process.env,
+      'process.env': process.env,
     },
     build: {
       // 打包文件夹位置
-      outDir: "an_ui",
+      outDir: 'an_ui',
       // 静态文件所在位置
-      assetsDir: "assets",
+      assetsDir: 'assets',
       // 混淆器
-      minify: "terser",
+      minify: 'terser',
       terserOptions: {
         // 清除console等多余代码
         compress: {
@@ -57,12 +58,12 @@ export default ({ mode }) => {
       //打包文件按照类型分文件夹显示
       rollupOptions: {
         input: {
-          main: path.resolve(__dirname, "index.html"),
+          main: path.resolve(__dirname, 'index.html'),
         },
         output: {
-          chunkFileNames: "js/app-[hash].js",
-          entryFileNames: "js/app-[hash].js",
-          assetFileNames: "[ext]/[ext]-[hash].[ext]",
+          chunkFileNames: 'js/app-[hash].js',
+          entryFileNames: 'js/app-[hash].js',
+          assetFileNames: '[ext]/[ext]-[hash].[ext]',
         },
       },
     },

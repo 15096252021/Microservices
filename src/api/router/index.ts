@@ -8,3 +8,10 @@ export function  getWhileRouterlist(){
     method: "get"
   })
 }
+export function getMenu(data?:any){
+  return request({
+    url: "/user/menu",
+    method: "get",
+    data: qs.stringify(data)
+  })
+}

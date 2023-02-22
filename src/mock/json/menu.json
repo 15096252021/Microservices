@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "id": "123",
+      "name": "homepage",
+      "path": "/system/Home_Page",
+      "title": "测试首页",
+      "icon": "",
+      "permission": ""
+    }
+  ]
+}
