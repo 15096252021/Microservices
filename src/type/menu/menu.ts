@@ -1,9 +1,17 @@
 /** @format */
 
 export interface menuItem {
-  icon: "Calendar";
-  index: String;
-  title: String;
-  permission: String;
+  menuid: string;
+  menu_name: string;
+  parentid: string;
+  router_name: string;
+  router_path: string;
+  router_component: string;
+  menu_type: string;
+  icon: string;
+  is_crumbs: boolean;
+  flag: boolean;
+  is_view: boolean;
+  auth: string;
   children: Array<menuItem>;
 }

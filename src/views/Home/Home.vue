@@ -8,7 +8,7 @@
     </el-header>
     <el-container class="home-body">
       <el-aside class="home-body-aside" :style="shrinkORNot">
-        <menuTree :MenuList="items" />
+        <menuTree/>
       </el-aside>
       <el-main class="home-body-content" :style="contentWidth">
         <el-header class="home-body-content-crumbs">
@@ -23,150 +23,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from 'vue';
-import Header from '@/components/Header.vue';
-import sidebar from '@/components/sidebar.vue';
-import tags from '@/components/tags.vue';
+import { defineComponent, ref, computed } from 'vue';
+import Header from '@/components/common/Header.vue';
+import sidebar from '@/components/common/sidebar.vue';
+import tags from '@/components/common/tags.vue';
 import { showLoading } from '@/utils/Loading';
 import { useSidebarStore } from '@/store/sidebar';
-import { getMenu } from '@/api/router';
-import { useDynamicRouterStore } from '@/store/dynamicRouter';
-import { useRouter } from 'vue-router';
+import { useDynamicRouterStore } from '@/store/router/dynamicRouter';
+import { menuItem } from '@/type/menu/menu';
 export default defineComponent({
   setup() {
     const loading = ref(true);
     showLoading(loading);
-    const items = [
-      {
-        icon: 'CirclePlus',
-        index: '/Viedo/1',
-        title: '系统首页',
-        permission: '1',
-      },
-      {
-        icon: 'Calendar',
-        index: '1',
-        title: '表格相关',
-        permission: '2',
-        children: [
-          {
-            index: '/system/Home_page',
-            title: '常用表格',
-            permission: '2',
-          },
-          {
-            index: '/import',
-            title: '导入Excel',
-            permission: '2',
-          },
-          {
-            index: '/export',
-            title: '导出Excel',
-            permission: '2',
-          },
-        ],
-      },
-      {
-        icon: 'DocumentCopy',
-        index: '/tabs',
-        title: 'tab选项卡',
-        permission: '3',
-      },
-      {
-        icon: 'Edit',
-        index: '3',
-        title: '表单相关',
-        permission: '4',
-        children: [
-          {
-            index: '/form',
-            title: '基本表单',
-            permission: '5',
-          },
-          {
-            index: '/upload',
-            title: '文件上传',
-            permission: '6',
-          },
-          {
-            index: '4',
-            title: '三级菜单',
-            permission: '7',
-            children: [
-              {
-                index: '/editor',
-                title: '富文本编辑器',
-                permission: '8',
-              },
-              {
-                index: '/markdown',
-                title: 'markdown编辑器',
-                permission: '9',
-                children: [
-                  {
-                    index: '150',
-                    title: '4级菜单',
-                    permission: '7',
-                    children: [
-                      {
-                        index: '/editor',
-                        title: '富文本编辑器',
-                        permission: '8',
-                      },
-                      {
-                        index: '/markdown',
-                        title: 'markdown编辑器',
-                        permission: '9',
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        icon: 'Setting',
-        index: '/icon',
-        title: '自定义图标',
-        permission: '10',
-      },
-      {
-        icon: 'PieChart',
-        index: '/charts',
-        title: 'chart图表',
-        permission: '11',
-      },
-      {
-        icon: 'Warning',
-        index: '/permissionion',
-        title: '权限管理',
-        permission: '13',
-      },
-      {
-        icon: 'Setting',
-        index: '/icon',
-        title: '自定义图标',
-        permission: '10',
-      },
-      {
-        icon: 'PieChart',
-        index: '/charts',
-        title: 'chart图表',
-        permission: '11',
-      },
-      {
-        icon: 'Warning',
-        index: '/permissionion/1',
-        title: '权限管理',
-        permission: '13',
-      },
-    ];
-
     // 侧边栏状态管理器
     const sidebar = useSidebarStore();
-
+    
     const shrinkORNot = computed(() => {
       return !sidebar.collapse ? { width: '250px' } : { width: '60px' };
     });
@@ -175,22 +46,10 @@ export default defineComponent({
         ? { width: 'calc(100% - 250px)' }
         : { width: 'calc(100% - 60px)' }
     );
-    const DynamicRouterStore = useDynamicRouterStore();
-    const router = useRouter();
-    onMounted(() => {
-      getMenu()
-        .then((res) => {
-          DynamicRouterStore.AddDynamicRouteMap(res.data, router);
-        })
-        .catch((res) => {
-          console.log(res);
-        });
-    });
     return {
       loading,
-      items,
       shrinkORNot,
-      contentWidth,
+      contentWidth
     };
   },
   components: {

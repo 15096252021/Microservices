@@ -18,11 +18,6 @@ export default defineComponent({
     let menus = reactive({ mensList });
     const app = useStore();
     const {name} = storeToRefs(app);
-    onMounted(() => {
-      axios.get("/user/menu").then((res) => {
-        menus.mensList = res.data.menusList;
-      });
-    });
     const chageName = () =>{
       name.value = "特殊的吉萨大和"
     }

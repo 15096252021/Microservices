@@ -16,26 +16,35 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useSidebarStore } from "@/store/sidebar";
-import { useRoute } from "vue-router";
-import { menuItem } from "@/type/menu/menu";
-import RecursiveMenu from "@/components/RecursiveMenu.vue";
+import { computed, defineComponent, onMounted } from 'vue';
+import { useSidebarStore } from '@/store/sidebar';
+import { useRoute } from 'vue-router';
+import RecursiveMenu from '@/components/common/RecursiveMenu.vue';
+import { menuItem } from '@/type/menu/menu';
+import { getMenu } from '@/api/router';
+import { useDynamicRouterStore } from '@/store/router/dynamicRouter';
 export default defineComponent({
-  name: "menuTree",
+  name: 'menuTree',
   setup() {
     const route = useRoute();
     const onRoutes = computed(() => route.path);
     const sidebar = useSidebarStore();
-
+    const dynamicRouterStore = useDynamicRouterStore();
+    let MenuList = computed(
+      () => dynamicRouterStore.menuList as Array<menuItem>
+    );
+    onMounted(() => {
+      if (!Boolean(dynamicRouterStore.hasRoute)) {
+        getMenu().then((res) => {
+          dynamicRouterStore.UpdateMenuList(res.data);
+        });
+      }
+    });
     return {
-      route,
       onRoutes,
       sidebar,
+      MenuList,
     };
-  },
-  props: {
-    MenuList: Array<menuItem>,
   },
   components: {
     RecursiveMenu,

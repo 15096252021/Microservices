@@ -1,9 +1,9 @@
-import menu from './json/menu.json'
+import menu from './json/menuTree.json'
 export default [{
   type: 'get',
   url: '/user/login',
   response: () => {
-    return { }
+    return {}
   }
 }, {
   type: 'get',

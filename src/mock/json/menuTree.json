@@ -1,0 +1,150 @@
+{
+  "code": 200,
+  "msg": "ok",
+  "data": [
+    {
+      "menuid": "cs001",
+      "menu_name": "系统首页",
+      "parentid": "",
+      "router_name": "homepage",
+      "router_path": "/system/homepage",
+      "router_component": "/system/Home_Page",
+      "menu_type": "02",
+      "icon": "CirclePlus",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": ""
+    },
+    {
+      "menuid": "cs002",
+      "menu_name": "表格相关",
+      "parentid": "",
+      "router_name": "table",
+      "router_path": "/table",
+      "router_component": "/table",
+      "menu_type": "01",
+      "icon": "Calendar",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": "",
+      "children": [
+        {
+          "menuid": "cs003",
+          "menu_name": "常用表格",
+          "parentid": "cs002",
+          "router_name": "commonTable",
+          "router_path": "/common/table",
+          "router_component": "/Viedo/Viedo",
+          "menu_type": "02",
+          "icon": "CirclePlus",
+          "is_crumbs": true,
+          "flag": true,
+          "is_view": false,
+          "auth": ""
+        },
+        {
+          "menuid": "cs004",
+          "menu_name": "导入Excel",
+          "parentid": "cs002",
+          "router_name": "import",
+          "router_path": "/import",
+          "router_component": "/table/import",
+          "menu_type": "02",
+          "icon": null,
+          "is_crumbs": true,
+          "flag": true,
+          "is_view": false,
+          "auth": ""
+        },
+        {
+          "menuid": "cs005",
+          "menu_name": "导出Excel",
+          "parentid": "cs002",
+          "router_name": "export",
+          "router_path": "/common/export",
+          "router_component": "/table/export",
+          "menu_type": "02",
+          "icon": null,
+          "is_crumbs": true,
+          "flag": true,
+          "is_view": false,
+          "auth": ""
+        }
+      ]
+    },
+    {
+      "menuid": "cs006",
+      "menu_name": "tab选项卡",
+      "parentid": "",
+      "router_name": "tabs",
+      "router_path": "/tabs",
+      "router_component": "/tabs",
+      "menu_type": "02",
+      "icon": "DocumentCopy",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": ""
+    },
+    {
+      "menuid": "cs007",
+      "menu_name": "表单相关",
+      "parentid": "",
+      "router_name": "",
+      "router_path": "",
+      "router_component": "",
+      "menu_type": "01",
+      "icon": "Edit",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": "",
+      "children": [
+        {
+          "menuid": "cs008",
+          "menu_name": "基本表单",
+          "parentid": "cs007",
+          "router_name": "form",
+          "router_path": "/form",
+          "router_component": "/form",
+          "menu_type": "02",
+          "icon": null,
+          "is_crumbs": true,
+          "flag": true,
+          "is_view": false,
+          "auth": ""
+        },
+        {
+          "menuid": "cs009",
+          "menu_name": "文件上传",
+          "parentid": "cs007",
+          "router_name": "upload",
+          "router_path": "/upload",
+          "router_component": "/upload",
+          "menu_type": "02",
+          "icon": null,
+          "is_crumbs": true,
+          "flag": true,
+          "is_view": false,
+          "auth": ""
+        }
+      ]
+    },
+    {
+      "menuid": "cs010",
+      "menu_name": "echarts图表",
+      "parentid": "",
+      "router_name": "eacharts",
+      "router_path": "/eacharts",
+      "router_component": "/eacharts",
+      "menu_type": "02",
+      "icon": "DocumentCopy",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": ""
+    }
+  ]
+}

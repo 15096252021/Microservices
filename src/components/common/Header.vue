@@ -14,6 +14,14 @@
     <div class="logo">后台管理系统</div>
     <div class="header-right">
       <div class="header-user-con">
+        <el-tooltip content="更新缓存">
+          <el-icon
+            :size="30"
+            @click="resetMenuList"
+            style="left: 5px; cursor: pointer">
+            <Sort />
+          </el-icon>
+        </el-tooltip>
         <!-- 消息中心 -->
         <div class="btn-bell" @click="router.push('/tabs')">
           <el-tooltip
@@ -25,7 +33,7 @@
           <span v-if="message" class="btn-bell-badge"></span>
         </div>
         <!-- 用户头像 -->
-        <el-avatar :size="30" :src="imgUrl" class="user-avatar" />
+        <el-avatar :size="40" :src="imgUrl" class="user-avatar" />
         <!-- 用户名下拉菜单 -->
         <el-dropdown class="user-name" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
@@ -48,13 +56,24 @@
   </div>
 </template>
 <script lang="ts" name="Header" setup>
-import { onMounted } from "vue";
-import { useSidebarStore } from "@/store/sidebar";
-import { useRouter } from "vue-router";
-import imgUrl from "@/assets/logo.png";
-
+import { inject, onMounted } from 'vue';
+import { useSidebarStore } from '@/store/sidebar';
+import { useDynamicRouterStore } from '@/store/router/dynamicRouter';
+import { useRouter } from 'vue-router';
+import imgUrl from '@/assets/logo.png';
+import { ElMessage } from 'element-plus';
+const DynamicRouterStore = useDynamicRouterStore();
+const refers =  inject("reload") as any;
+const resetMenuList = () => {
+  DynamicRouterStore.resetMenuList();
+  ElMessage({
+    message: '刷新成功',
+    type: 'success',
+  });
+  refers();
+};
 const username: string | null = localStorage.getItem(
-  "zdp_admin_template_username"
+  'zdp_admin_template_username'
 );
 const message: number = 2;
 
@@ -75,11 +94,11 @@ onMounted(() => {
 // 用户名下拉菜单选择事件
 const router = useRouter();
 const handleCommand = (command: string) => {
-  if (command == "logout") {
-    localStorage.removeItem("zdp_admin_template_username");
-    router.push("/Login");
-  } else if (command == "user") {
-    router.push("/user");
+  if (command == 'logout') {
+    localStorage.removeItem('zdp_admin_template_username');
+    router.push('/Login');
+  } else if (command == 'user') {
+    router.push('/user');
   }
 };
 </script>

@@ -2,7 +2,7 @@ import { useRouter } from 'vue-router';
 
 /** @format */
 
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 interface ListItem {
   name: string;
@@ -11,7 +11,7 @@ interface ListItem {
 }
 
 // 用于存储tags标签
-export const useTagsStore = defineStore("tags", {
+export const useTagsStore = defineStore('tags', {
   state: () => {
     return {
       // 标签列表
@@ -26,11 +26,11 @@ export const useTagsStore = defineStore("tags", {
 
       if (state.list.length === 0) {
         state.list.push({
-          name: 'Viedo',
+          name: 'homepage',
           title: '首页',
-          path: '/Viedo',
+          path: '/system/homepage',
         });
-        router.push({ name: "Viedo" })
+        router.push({ name: 'homepage' });
       }
       return state.list.length > 0;
     },
