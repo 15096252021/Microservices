@@ -40,6 +40,7 @@ async function setupApp() {
   //     }
   //   },
   // });
+
   // 挂载全局组件
   GlobalMount(app);
   app.mount('#app');

@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted } from 'vue';
+import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { useSidebarStore } from '@/store/sidebar';
 import { useRoute } from 'vue-router';
 import RecursiveMenu from '@/components/common/RecursiveMenu.vue';
@@ -30,20 +30,22 @@ export default defineComponent({
     const onRoutes = computed(() => route.path);
     const sidebar = useSidebarStore();
     const dynamicRouterStore = useDynamicRouterStore();
-    let MenuList = computed(
-      () => dynamicRouterStore.menuList as Array<menuItem>
-    );
-    onMounted(() => {
+    const data = reactive({
+      MenuList: [] as Array<menuItem>,
+    });
+    onMounted(async () => {
       if (!Boolean(dynamicRouterStore.hasRoute)) {
-        getMenu().then((res) => {
+        await getMenu().then((res) => {
           dynamicRouterStore.UpdateMenuList(res.data);
+          
         });
       }
+      data.MenuList = dynamicRouterStore.menuList as Array<menuItem>;
     });
     return {
       onRoutes,
       sidebar,
-      MenuList,
+      ...toRefs(data),
     };
   },
   components: {
