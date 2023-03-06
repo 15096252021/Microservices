@@ -1,47 +1,100 @@
 <template>
-  <div class="aside">
-    <h2>520{{name}}</h2>
-    <button @click="chageName">改变name</button>
-</div>
+  <div class="videoClass">
+    <el-input v-model="url" placeholder="视频流地址" />
+    <el-button type="primary" @click="play">播放</el-button>
+    <video id="videoElement" controls autoplay muted></video>
+  </div>
 </template>
 <script lang="ts">
-
-import axios from "axios";
-import { defineComponent, onMounted, reactive } from "vue";
-import { useStore } from "@/store";
-import { storeToRefs } from 'pinia'
+import { defineComponent, onMounted, ref } from 'vue';
+import flvjs from 'flv.js';
 
 export default defineComponent({
-  name: "Aside",
+  name: 'Aside',
   setup() {
-    const mensList: any = [];
-    let menus = reactive({ mensList });
-    const app = useStore();
-    const {name} = storeToRefs(app);
-    const chageName = () =>{
-      name.value = "特殊的吉萨大和"
-    }
+    let flvPlayer: flvjs.Player | null = null;
+    const play = () => {
+      console.log(url.value);
+
+      if (flvPlayer) {
+        flvPlayer.destroy();
+        console.log(flvjs.isSupported());
+
+        if (flvjs.isSupported()) {
+          var videoElement = document.getElementById(
+            'videoElement'
+          ) as HTMLMediaElement;
+          flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            isLive: true,
+            hasAudio: false,
+            url: url.value, // 自己的flv视频流
+          });
+          flvPlayer.attachMediaElement(videoElement);
+          flvPlayer.load();
+          flvPlayer.play();
+        }
+      } else {
+        if (flvjs.isSupported()) {
+          var videoElement = document.getElementById(
+            'videoElement'
+          ) as HTMLMediaElement;
+          flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            isLive: true,
+            hasAudio: false,
+            url: url.value, // 自己的flv视频流
+          });
+          flvPlayer.attachMediaElement(videoElement);
+          flvPlayer.load();
+          flvPlayer.play();
+        }
+      }
+    };
+    const url = ref(
+      'http://36.35.240.148:7886/live/cameraid/1000003%243/substream/1.flv'
+    );
+    const url1 =
+      'https://czmhns.zhihuitianyan.cn:9443/live/482@20230306142537909.flv';
+    onMounted(() => {
+      if (flvjs.isSupported()) {
+        var videoElement = document.getElementById(
+          'videoElement'
+        ) as HTMLMediaElement;
+        flvPlayer = flvjs.createPlayer({
+          type: 'flv',
+          isLive: true,
+          hasAudio: false,
+          url: url.value, // 自己的flv视频流
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        flvPlayer.play();
+      }
+    });
     return {
-      name,chageName
+      flvPlayer,
+      play,
+      url,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.el-menu-item.is-active {
-  background-color: var(--el-menu-hover-bg-color);
-}
-
-.collpase-btn {
-  text-align: center;
+.videoClass {
+  height: 100%;
   width: 100%;
-  padding: 10px 0px;
-  cursor: pointer;
-
-  .el-icon {
-    color: white;
-    font-size: 24px;
+  .el-input {
+    width: 80%;
   }
+  .el-button {
+    width: 10%;
+    align-content: left;
+  }
+}
+.videoClass video {
+  height: calc(100% - 80px);
+  width: calc(100% - 20px);
 }
 </style>
