@@ -10,12 +10,7 @@
   </el-row>
   <el-row :span="24">
     <el-col :span="24">
-      <video
-        id="videoElement"
-        class="videoClass"
-        controls
-        autoplay
-        muted></video>
+      <video :id="videoId" class="videoClass" controls autoplay muted></video>
     </el-col>
   </el-row>
   <!-- </div> -->
@@ -26,17 +21,19 @@ import flvjs from 'flv.js';
 
 export default defineComponent({
   name: 'Aside',
-  setup() {
+  setup(props) {
+    let videoId = ref('videoElement' + props.videoId);
     let flvPlayer: flvjs.Player | null = null;
     const play = () => {
       if (flvPlayer) {
         flvPlayer.destroy();
         if (flvjs.isSupported()) {
           var videoElement = document.getElementById(
-            'videoElement'
+            videoId.value
           ) as HTMLMediaElement;
+
           flvPlayer = flvjs.createPlayer({
-            type: 'm3u8',
+            type: 'flv',
             isLive: true,
             hasAudio: false,
             url: url.value, // 自己的flv视频流
@@ -48,10 +45,10 @@ export default defineComponent({
       } else {
         if (flvjs.isSupported()) {
           var videoElement = document.getElementById(
-            'videoElement'
+            videoId.value
           ) as HTMLMediaElement;
           flvPlayer = flvjs.createPlayer({
-            type: 'm3u8',
+            type: 'flv',
             isLive: true,
             hasAudio: false,
             url: url.value, // 自己的flv视频流
@@ -66,29 +63,17 @@ export default defineComponent({
       'http://36.35.240.148:7886/live/cameraid/1000003%243/substream/1.flv'
     );
     onMounted(() => {
-      if (flvPlayer) {
-        flvPlayer.destroy();
-      }
-      if (flvjs.isSupported()) {
-        var videoElement = document.getElementById(
-          'videoElement'
-        ) as HTMLMediaElement;
-        flvPlayer = flvjs.createPlayer({
-          type: 'flv',
-          isLive: true,
-          hasAudio: false,
-          url: url.value, // 自己的flv视频流
-        });
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
-        flvPlayer.play();
-      }
+      play();
     });
     return {
       flvPlayer,
       play,
       url,
+      videoId,
     };
+  },
+  props: {
+    videoId: String,
   },
 });
 </script>

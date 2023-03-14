@@ -6,18 +6,17 @@
       <h2>{{ msg }}</h2>
     </div>
     <div style="width: 500px; height: 450px">
-      <Viedo></Viedo>
+      <VideoCom  videoId="v1"></VideoCom>
     </div>
     <div style="width: 500px; height: 450px">
-      <Viedo1></Viedo1>
+      <VideoCom videoId="v2"></VideoCom>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import Viedo from '@/views/Viedo/Viedo.vue';
-import Viedo1 from '@/views/Viedo/Viedo.vue';
+import VideoCom from '@/views/Viedo/Viedo.vue';
 export default defineComponent({
   name: 'Home_page',
   setup() {
@@ -27,8 +26,7 @@ export default defineComponent({
     };
   },
   components: {
-    Viedo,
-    Viedo1,
+    VideoCom
   },
 });
 </script>
