@@ -10,5 +10,5 @@
       "~/*": ["/src/*"]
     }
   },
-  "include": ["vite.config.ts","node"]
+  "include": ["vite.config.ts", "node"]
 }
