@@ -75,12 +75,26 @@
       ]
     },
     {
+      "menuid": "cs00855",
+      "menu_name": "socket服务",
+      "parentid": "",
+      "router_name": "socketvue",
+      "router_path": "/socketvue",
+      "router_component": "/Socket/Socket",
+      "menu_type": "02",
+      "icon": "DocumentCopy",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": ""
+    },
+    {
       "menuid": "cs006",
       "menu_name": "tab选项卡",
       "parentid": "",
       "router_name": "tabs",
       "router_path": "/tabs",
-      "router_component": "/tabs",
+      "router_component": "/FlowAble/FLowAble",
       "menu_type": "02",
       "icon": "DocumentCopy",
       "is_crumbs": true,

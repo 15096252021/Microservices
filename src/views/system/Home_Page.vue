@@ -1,22 +1,12 @@
 <template>
-  <div style="display: flex">
-    <div style="width: 500px; height: 450px">
-      <input v-model="msg" />
-      <h2>这是一个测试页面</h2>
-      <h2>{{ msg }}</h2>
-    </div>
-    <div style="width: 500px; height: 450px">
-      <VideoCom  videoId="v1"></VideoCom>
-    </div>
-    <div style="width: 500px; height: 450px">
-      <VideoCom videoId="v2"></VideoCom>
-    </div>
+  <div class="Home_Page_Body">
+      <div></div>
+      <div></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import VideoCom from '@/views/Viedo/Viedo.vue';
 export default defineComponent({
   name: 'Home_page',
   setup() {
@@ -24,11 +14,15 @@ export default defineComponent({
     return {
       msg,
     };
-  },
-  components: {
-    VideoCom
-  },
+  }
 });
 </script>
 
-<style scoped></style>
+<style lang = 'scss' scoped>
+  .Home_Page_Body{
+    width: 100%;
+    height: 100%;
+    background-color: #f0f;
+    
+  }
+</style>

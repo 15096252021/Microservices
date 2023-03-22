@@ -85,6 +85,7 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     display: block;
+    object-fit: fill;
   }
   .el-col {
     width: 100%;

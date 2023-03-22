@@ -29,9 +29,8 @@ import sidebar from '@/components/common/sidebar.vue';
 import tags from '@/components/common/tags.vue';
 import { showLoading } from '@/utils/Loading';
 import { useSidebarStore } from '@/store/sidebar';
-import { useDynamicRouterStore } from '@/store/router/dynamicRouter';
-import { menuItem } from '@/type/menu/menu';
 export default defineComponent({
+  name: 'Main_Frame',
   setup() {
     const loading = ref(true);
     showLoading(loading);
