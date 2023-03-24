@@ -1,65 +1,75 @@
 <template>
-  <div>
-    <el-button size="small" @click="start" type="primary">开始</el-button>
-    <el-button size="small" @click="stop" type="primary">暂停</el-button>
-    <el-button size="small" @click="login" type="primary">链接</el-button>
-    <el-button size="small" @click="loginOut" type="primary">断开</el-button>
-    <div></div>
-  </div>
+  <el-table
+    :data="userList"
+    style="width: 100%"
+    :row-class-name="tableRowClassName">
+    <el-table-column prop="id" label="主键" width="720" />
+    <el-table-column prop="busy" label="是否忙碌" width="180" />
+    <el-table-column prop="initiate" label="是否为发起者" />
+    <el-table-column fixed="right" label="操作" width="120">
+      <template #default="scope">
+        <el-button
+          link
+          type="primary"
+          size="small"
+          @click="inviteUser(scope.row)"
+          >发起通话</el-button
+        >
+        <el-button link type="primary" size="small">Edit</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted } from 'vue';
-import io from 'socket.io-client';
+import { defineComponent, onMounted, onUnmounted, toRefs } from 'vue';
+import {
+  SocketIoData,
+  connectSocket,
+  disconnectSocket,
+  inviteUser,
+  createSocket,
+} from './SocketIo';
+import { userDataInt } from './SocketIOType';
 export default defineComponent({
   name: 'socketVue',
   setup() {
-    const socket = io('http://192.168.0.104:10065', {
-      // path: '/mh/ws',
-      // query: {},
-      transports: ['websocket','polling'],
-      // transports: [''],
-      ackTimeout: 30000,
-      reconnectionAttempts: 2,
-      reconnectionDelay: 2000,
-    });
     onMounted(() => {
-      console.log('开始链接');
-      // 监听 Socket 连接成功事件
-      login;
+      createSocket({ type: 'Servlet' });
+      connectSocket();
     });
-    onUnmounted(() => {
-      console.log('关闭链接');
-      socket?.close();
-    });
-    const start = () => {
-      console.log('发送消息');
 
-      socket.emit('message', '开始');
-    };
-    const stop = () => {
-      socket.emit('message', '暂停');
-    };
-    const login = () => {
-      if (socket.disconnected) {
-        socket.on('connect', () => {
-          console.log('Connected to server!');
-        });
-      }
-    };
-    const loginOut = () => {
-      if (!socket.disconnected) {
-        socket.close();
+    onUnmounted(() => {
+      disconnectSocket();
+    });
+
+    const tableRowClassName = ({
+      row,
+      rowIndex,
+    }: {
+      row: userDataInt;
+      rowIndex: number;
+    }) => {
+      if (row.busy) {
+        return 'warning-row';
+      } else {
+        return 'success-row';
       }
     };
     return {
-      start,
-      stop,
-      login,
-      loginOut,
+      ...toRefs(SocketIoData),
+      inviteUser,
+      tableRowClassName,
     };
   },
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(#ee1212);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(#16c96f);
+}
+</style>

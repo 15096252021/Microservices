@@ -89,6 +89,20 @@
       "auth": ""
     },
     {
+      "menuid": "cs00855",
+      "menu_name": "socket客户端",
+      "parentid": "",
+      "router_name": "socketclintvue",
+      "router_path": "/socketclintvue",
+      "router_component": "/Socket/SocketClient",
+      "menu_type": "02",
+      "icon": "DocumentCopy",
+      "is_crumbs": true,
+      "flag": true,
+      "is_view": false,
+      "auth": ""
+    },
+    {
       "menuid": "cs006",
       "menu_name": "tab选项卡",
       "parentid": "",

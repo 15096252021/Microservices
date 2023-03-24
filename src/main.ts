@@ -13,9 +13,8 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 import './styles/dark/css-vars.css';
 import './styles/element/index.scss';
 import { GlobalMount } from '@/public/GlobalMount';
-import NProgress from 'nprogress'
-import  'nprogress/nprogress.css';
-
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 ProgressConfig();
 NProgress.start();
 async function setupApp() {
@@ -48,7 +47,7 @@ async function setupApp() {
 }
 setupApp();
 document.title = import.meta.env.VITE_TITLE || '';
-function ProgressConfig(){
+function ProgressConfig() {
   NProgress.configure({
     // 动画方式
     easing: 'ease',
@@ -63,7 +62,6 @@ function ProgressConfig(){
     //初始化时的百分比
     minimum: 0.3,
     // 指定此选项更改的父级容器
-    parent: 'body'
-  })
+    parent: 'body',
+  });
 }
-
