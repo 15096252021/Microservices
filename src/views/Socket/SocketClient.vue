@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div
-      style="width: 31.25rem; height: 31.25rem; background-color: aquamarine">
-      <video ref="video" autoplay></video>
+    <div class="video-div">
+      <video ref="video" autoplay mirror></video>
       <!-- <audio ref="audio" autoplay></audio> -->
     </div>
     <el-button
@@ -40,6 +39,8 @@ import {
   initiate,
   REJECT,
   callEnd,
+  sendVideoStream,
+  getUserMedia,
 } from './SocketIo';
 export default defineComponent({
   name: 'socketVue',
@@ -47,45 +48,17 @@ export default defineComponent({
     let localCameraVideo = ref();
     let video = ref();
     let audio = ref();
-    const  initCamera = async () =>{
-      try {
-        let stream
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          stream = await navigator.mediaDevices.getUserMedia({ video: true,audio:true })
-        } else {
-          stream = await navigator.getUserMedia({ video: true,audio:true })
-        }
-        video.value.srcObject = stream
-        audio.value.srcObject = stream
-        console.log(video.value);
-      } catch (error) {
-        console.error(error)
-      }
-    }
 
     onMounted(() => {
       createSocket({ type: 'client' });
       connectSocket();
-      initCamera()
+      sendVideoStream(video, audio);
     });
 
     onUnmounted(() => {
-      disconnectSocket();
+      disconnectSocket(video);
+      
     });
-    const initCameraAndMicrophone = () => {
-      try {
-        const stream = navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true,
-        });
-        console.log(stream);
-
-        video.value.srcObject = stream;
-        audio.value.srcObject = stream;
-      } catch (error) {
-        console.error(error);
-      }
-    };
     return {
       connectSocket,
       disconnectSocket,
@@ -96,7 +69,6 @@ export default defineComponent({
       localCameraVideo,
       video,
       audio,
-      initCameraAndMicrophone,
       REJECT,
       callEnd,
     };
@@ -104,4 +76,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.video-div {
+  width: 31.25rem;
+  height: 31.25rem;
+  background-color: aquamarine;
+}
+.video-div video {
+  transform: scaleX(-1);
+}
+</style>

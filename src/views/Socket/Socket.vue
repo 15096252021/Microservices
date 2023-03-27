@@ -19,16 +19,21 @@
       </template>
     </el-table-column>
   </el-table>
+  <div class="video-div">
+    <video ref="video" id="videoHTml" autoplay mirror></video>
+    <audio ref="audio" autoplay></audio>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, toRefs } from 'vue';
+import { defineComponent, onMounted, onUnmounted, toRefs, ref } from 'vue';
 import {
   SocketIoData,
   connectSocket,
   disconnectSocket,
   inviteUser,
   createSocket,
+  gainVideoStream,
 } from './SocketIo';
 import { userDataInt } from './SocketIOType';
 export default defineComponent({
@@ -37,6 +42,11 @@ export default defineComponent({
     onMounted(() => {
       createSocket({ type: 'Servlet' });
       connectSocket();
+      gainVideoStream(
+        document.getElementById('videoHTml') as HTMLVideoElement,
+        video,
+        audio
+      );
     });
 
     onUnmounted(() => {
@@ -56,10 +66,15 @@ export default defineComponent({
         return 'success-row';
       }
     };
+    let video = ref();
+    let audio = ref();
+
     return {
       ...toRefs(SocketIoData),
       inviteUser,
       tableRowClassName,
+      video,
+      audio,
     };
   },
 });
@@ -71,5 +86,13 @@ export default defineComponent({
 }
 .el-table .success-row {
   --el-table-tr-bg-color: var(#16c96f);
+}
+.video-div {
+  width: 31.25rem;
+  height: 31.25rem;
+  background-color: aquamarine;
+}
+.video-div video {
+  transform: scaleX(-1);
 }
 </style>

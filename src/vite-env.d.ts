@@ -6,6 +6,8 @@ interface ImportMetaEnv {
   readonly VITE_BASE_URL:String
   readonly VITE_TITLE:String
   readonly VITE_SKIP_LOGIN:String
+  readonly VITE_SOCKET_URL:String
+  readonly VITE_SOCKET_PATH:String
 }
 
 interface ImportMeta {

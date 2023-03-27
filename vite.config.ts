@@ -4,7 +4,7 @@ import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import { viteMockServe } from 'vite-plugin-mock';
-import mkcert from 'vite-plugin-mkcert'
+import mkcert from 'vite-plugin-mkcert';
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const configure = loadEnv(mode, process.cwd());
@@ -20,12 +20,12 @@ export default ({ mode }) => {
         logger: false,
         mockPath: './src/mock',
       }),
-      mkcert({
-        // 指定生成证书的域名
-        domains: ['localhost'],
-        // 指定证书有效期（单位：天）
-        days: 365
-      })
+      // mkcert({
+      //   // 指定生成证书的域名
+      //   domains: ['localhost'],
+      //   // 指定证书有效期（单位：天）
+      //   days: 365,
+      // }),
     ],
     resolve: {
       alias: {
@@ -36,7 +36,7 @@ export default ({ mode }) => {
     // 配置代理
     server: {
       open: false,
-      port: 8082,
+      port: 5173,
       proxy: {
         [configure.VITE_BASE_URL]: {
           target: configure.VITE_APP_BASE_URL || '',
@@ -76,4 +76,3 @@ export default ({ mode }) => {
     },
   });
 };
-
