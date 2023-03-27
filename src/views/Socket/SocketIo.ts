@@ -66,9 +66,13 @@ export function connectSocket() {
 export function disconnectSocket(video?: any) {
   console.log('断开连接');
   socket.close();
+  // try {
   video.value.getTracks().forEach((track: { stop: () => void }) => {
     track.stop();
   });
+  // } catch (e) {
+  //   console.log(e);
+  // }
 }
 // 邀请用户
 export function inviteUser(user?: userDataInt) {

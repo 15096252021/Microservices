@@ -15,6 +15,7 @@ import './styles/element/index.scss';
 import { GlobalMount } from '@/public/GlobalMount';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { Global_ErrorHandler } from './public/Exception/Global_Exception';
 ProgressConfig();
 NProgress.start();
 async function setupApp() {
@@ -39,7 +40,8 @@ async function setupApp() {
   //     }
   //   },
   // });
-
+  // 全局异常处理
+  app.config.errorHandler = Global_ErrorHandler
   // 挂载全局组件
   GlobalMount(app);
   app.mount('#app');

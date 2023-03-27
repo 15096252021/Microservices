@@ -15,7 +15,7 @@ export function createRouterGuard(app: App) {
   router.beforeEach(async (to, form, next) => {
     // 设置标题
     document.title = `后台管理系统`;
-    const dynamicRouterStore = useDynamicRouterStore();
+    initRouter();
     if (
       to.name !== 'Login' &&
       !getSession('token') &&
@@ -24,18 +24,6 @@ export function createRouterGuard(app: App) {
     ) {
       next({ name: 'Login' });
     } else {
-      // 判断是否添加过路由
-      if (!Boolean(dynamicRouterStore.hasRoute)) {
-        let menuList = dynamicRouterStore.menuList as Array<menuItem>;
-        if (!dynamicRouterStore.getMenuListType()) {
-          menuList = await getMenuList();
-          dynamicRouterStore.UpdateMenuList(menuList);
-        }
-        AddRouter(menuList, router);
-        dynamicRouterStore.changeHasRoute(
-          !Boolean(dynamicRouterStore.hasRoute)
-        );
-      }
       if (to.name == 'Login' && getSession('token')) {
         next({ name: 'home' });
       } else {
@@ -43,6 +31,22 @@ export function createRouterGuard(app: App) {
       }
     }
   });
+}
+export async function initRouter() {
+  
+  
+  const dynamicRouterStore = useDynamicRouterStore();
+  // 判断是否添加过路由
+  if (!Boolean(dynamicRouterStore.hasRoute)) {
+    let menuList = dynamicRouterStore.menuList as Array<menuItem>;
+    if (!dynamicRouterStore.getMenuListType()) {
+      menuList = await getMenuList();
+      dynamicRouterStore.UpdateMenuList(menuList);
+    }
+    console.log("加載路由");
+    AddRouter(menuList, router);
+    dynamicRouterStore.changeHasRoute(!Boolean(dynamicRouterStore.hasRoute));
+  }
 }
 // 不需要登录的白名单
 export function checkWileRouter(name: RouteRecordName | null | undefined) {
