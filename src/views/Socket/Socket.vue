@@ -81,12 +81,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.el-table .warning-row {
-  --el-table-tr-bg-color: var(#ee1212);
+:root {
+  .el-table .warning-row {
+    --el-table-tr-bg-color: var(#ee1212);
+  }
+  .el-table .success-row {
+    --el-table-tr-bg-color: var(#16c96f);
+  }
 }
-.el-table .success-row {
-  --el-table-tr-bg-color: var(#16c96f);
-}
+
 .video-div {
   width: 31.25rem;
   height: 31.25rem;

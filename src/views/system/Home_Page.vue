@@ -1,15 +1,12 @@
 <template>
   <div class="Home_Page_Body">
-    <div style="width: 500px; height: 500px">
-      <Viedo videoId="js120"></Viedo>
-    </div>
     <div></div>
     <div></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, reactive, unref } from 'vue';
 import Viedo from '../Viedo/Viedo.vue';
 export default defineComponent({
   name: 'Home_page',
@@ -19,6 +16,7 @@ export default defineComponent({
       msg,
     };
   },
+  
   components: {
     Viedo,
   },
