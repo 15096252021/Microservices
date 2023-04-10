@@ -38,6 +38,18 @@ export default ({ mode }) => {
       open: false,
       port: 5173,
       proxy: {
+        '/QrWater': {
+          target: 'http://127.0.0.1:9072',
+          changeOrigin: true,
+          // secure: false,
+          rewrite: (path) => path.replace(/^\/QrWater/, ''),
+        },
+        '/imageapi': {
+          target: 'http://127.0.0.1:9072/QrWater/',
+          changeOrigin: true,
+          // secure: false,
+          rewrite: (path) => path.replace(/^\/imageapi/, ''),
+        },
         [configure.VITE_BASE_URL]: {
           target: configure.VITE_APP_BASE_URL || '',
           changeOrigin: true,

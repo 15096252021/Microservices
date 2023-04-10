@@ -33,8 +33,6 @@ export function createRouterGuard(app: App) {
   });
 }
 export async function initRouter() {
-  
-  
   const dynamicRouterStore = useDynamicRouterStore();
   // 判断是否添加过路由
   if (!Boolean(dynamicRouterStore.hasRoute)) {
@@ -43,7 +41,7 @@ export async function initRouter() {
       menuList = await getMenuList();
       dynamicRouterStore.UpdateMenuList(menuList);
     }
-    console.log("加載路由");
+    console.log('加载路由');
     AddRouter(menuList, router);
     dynamicRouterStore.changeHasRoute(!Boolean(dynamicRouterStore.hasRoute));
   }

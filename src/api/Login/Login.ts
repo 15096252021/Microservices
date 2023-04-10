@@ -1,4 +1,4 @@
-import request from "@/request";
+import request from "@/request/dataRequest";
 import { LoginDataInt } from "@/type/Login/Login";
 import qs from "qs"
 
