@@ -24,9 +24,9 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
-import Header from '@/components/common/Header.vue';
-import sidebar from '@/components/common/sidebar.vue';
-import tags from '@/components/common/tags.vue';
+import Header from '@/components/common/Home/Header.vue';
+import sidebar from '@/components/common/Home/sidebar.vue';
+import tags from '@/components/common/Home/tags.vue';
 import { showLoading } from '@/utils/Loading';
 import { useSidebarStore } from '@/store/sidebar';
 export default defineComponent({

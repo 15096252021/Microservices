@@ -19,7 +19,7 @@
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue';
 import { useSidebarStore } from '@/store/sidebar';
 import { useRoute } from 'vue-router';
-import RecursiveMenu from '@/components/common/RecursiveMenu.vue';
+import RecursiveMenu from '@/components/common/Home/RecursiveMenu.vue';
 import { menuItem } from '@/type/menu/menu';
 import { getMenu } from '@/api/router';
 import { useDynamicRouterStore } from '@/store/router/dynamicRouter';

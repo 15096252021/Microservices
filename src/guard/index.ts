@@ -16,7 +16,7 @@ export function createRouterGuard(app: App) {
     // 设置标题
     document.title = `后台管理系统`;
     initRouter();
-    if (
+    if ( 
       to.name !== 'Login' &&
       !getSession('token') &&
       import.meta.env.VITE_SKIP_LOGIN == 'N' &&

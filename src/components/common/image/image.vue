@@ -11,7 +11,7 @@ export default defineComponent({
   setup(props) {
     let imageUrl = ref('');
     let filepath = props.filepath;
-    imageUrl.value = '/imageapi/File/ShowImages?filePath=' + filepath || '';
+    imageUrl.value = '/imageapi/File/ShowImages?filepath=' + filepath || '';
     return { imageUrl };
   },
   props: {
