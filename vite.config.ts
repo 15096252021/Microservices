@@ -45,7 +45,8 @@ export default ({ mode }) => {
           rewrite: (path) => path.replace(/^\/QrWater/, ''),
         },
         '/imageapi': {
-          target: 'http://127.0.0.1:9072/QrWater/',
+          // target: 'http://127.0.0.1:9072/QrWater/',
+          target: 'http://bjsw.ytxd.com.cn:8080/QrWater/',
           changeOrigin: true,
           // secure: false,
           rewrite: (path) => path.replace(/^\/imageapi/, ''),
